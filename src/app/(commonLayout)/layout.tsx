@@ -1,7 +1,16 @@
+import { Navbar } from "@/components/layouts/navbar";
+
 export default function CommonLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <section>{children}</section>;
+  return (
+    <section>
+      <div>
+        <Navbar />
+      </div>
+      {children}
+    </section>
+  );
 }
