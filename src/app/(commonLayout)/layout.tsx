@@ -1,4 +1,3 @@
-import { Footer } from "@/components/layouts/footer";
 import { Navbar } from "@/components/layouts/navbar";
 
 export default function CommonLayout({
@@ -8,13 +7,8 @@ export default function CommonLayout({
 }) {
   return (
     <section>
-      <div>
-        <Navbar />
-      </div>
+      <Navbar />
       {children}
-      <div>
-        <Footer />
-      </div>
     </section>
   );
 }
