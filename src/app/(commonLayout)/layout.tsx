@@ -6,7 +6,7 @@ export default function CommonLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
+    <section className="container mx-auto border-3 border-yellow-200">
       <Navbar />
       {children}
     </section>

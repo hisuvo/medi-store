@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/sheet";
 import { ModeToggle } from "./ModeToggle";
 import Link from "next/link";
+import { DropdownMenuAvatar } from "../shared/DropdownMenuAvatar";
 
 interface MenuItem {
   title: string;
@@ -165,13 +166,14 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
+            {true ? (
+              <DropdownMenuAvatar></DropdownMenuAvatar>
+            ) : (
+              <Button asChild variant="outline" size="sm">
+                <Link href={auth.login.url}>{auth.login.title}</Link>
+              </Button>
+            )}
             <ModeToggle />
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
           </div>
         </nav>
 
