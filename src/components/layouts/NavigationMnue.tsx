@@ -65,7 +65,7 @@ const Navbar = ({
     url: "/",
     src: "/",
     alt: "logo",
-    title: "Medi",
+    title: "MedeX",
   },
   menu = [
     { title: "Home", url: "/" },
@@ -166,13 +166,16 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
-            {true ? (
-              <DropdownMenuAvatar></DropdownMenuAvatar>
-            ) : (
-              <Button asChild variant="outline" size="sm">
-                <Link href={auth.login.url}>{auth.login.title}</Link>
-              </Button>
-            )}
+            <DropdownMenuAvatar />
+
+            <Button asChild variant="outline" size="sm">
+              <Link href={auth.login.url}>{auth.login.title}</Link>
+            </Button>
+
+            <Button asChild variant="outline" size="sm">
+              <Link href={auth.signup.url}>{auth.signup.title}</Link>
+            </Button>
+
             <ModeToggle />
           </div>
         </nav>

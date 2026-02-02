@@ -24,8 +24,8 @@ export function DropdownMenuAvatar() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="rounded-full">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
-            <AvatarFallback>LR</AvatarFallback>
+            <AvatarImage src="/" alt="shadcn" />
+            <AvatarFallback>SR</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

@@ -1,4 +1,5 @@
-import { Navbar } from "@/components/layouts/navbar";
+import Footer from "@/components/layouts/Footer";
+import { Navbar } from "@/components/layouts/NavigationMnue";
 
 export default function CommonLayout({
   children,
@@ -6,9 +7,10 @@ export default function CommonLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="container mx-auto border-3 border-yellow-200">
+    <section className="container mx-auto px-2">
       <Navbar />
       {children}
+      <Footer />
     </section>
   );
 }

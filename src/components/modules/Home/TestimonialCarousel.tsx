@@ -63,7 +63,7 @@ const testimonials: Testimonial[] = [
 export function TestimonialCarousel() {
   return (
     <section className=" py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="container mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold">Happy Clients Say</h2>
         </div>
@@ -88,7 +88,9 @@ export function TestimonialCarousel() {
                       ))}
                     </div>
 
-                    <p className="text-gray-700 mb-6">{item.review}</p>
+                    <p className="text-gray-700 dark:text-gray-300 mb-6">
+                      {item.review}
+                    </p>
 
                     <div className="flex items-center gap-3">
                       <Avatar>
@@ -104,7 +106,7 @@ export function TestimonialCarousel() {
                   </div>
 
                   {/* Right */}
-                  <div className="w-56 bg-gray-50 flex flex-col items-center justify-center p-4">
+                  {/* <div className="w-56 bg-gray-50 flex flex-col items-center justify-center p-4">
                     <Image
                       src={item.image}
                       alt={item.product}
@@ -115,7 +117,7 @@ export function TestimonialCarousel() {
                     <p className="text-sm text-center mt-3 text-muted-foreground">
                       {item.product}
                     </p>
-                  </div>
+                  </div> */}
                 </Card>
               </CarouselItem>
             ))}

@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
+import Link from "next/link";
 import {
   Carousel,
   CarouselContent,
@@ -14,7 +14,6 @@ type HeroSlide = {
   id: string;
   title: string;
   description: string;
-  image: string;
   ctaText: string;
   ctaLink: string;
 };
@@ -24,25 +23,22 @@ const slides: HeroSlide[] = [
     id: "1",
     title: "Flat 20% Off on Medicines",
     description: "Order genuine medicines with fast home delivery",
-    image: "/hero/hero-1.gif",
     ctaText: "Shop Now",
-    ctaLink: "/store",
+    ctaLink: "#",
   },
   {
     id: "2",
     title: "Upload Prescription",
     description: "Get medicines verified by licensed pharmacists",
-    image: "/hero/hero-2.gif",
     ctaText: "Upload Now",
-    ctaLink: "/prescription",
+    ctaLink: "#",
   },
   {
     id: "3",
     title: "Free Doctor Consultation",
     description: "Talk to certified doctors anytime, anywhere",
-    image: "/hero/hero-3.gif",
     ctaText: "Consult Now",
-    ctaLink: "/consult",
+    ctaLink: "#",
   },
 ];
 
@@ -61,32 +57,19 @@ export function Slider() {
       <CarouselContent>
         {slides.map((slide) => (
           <CarouselItem key={slide.id}>
-            <div className="relative h-[70vh] w-full">
-              {/* Background Image */}
-              <Image
-                src={slide.image}
-                alt={slide.title}
-                fill
-                priority
-                className="object-cover"
-              />
+            <div className="flex h-[50vh] w-full items-center justify-center bg-gradient-to-r from-primary/10 to-primary/5">
+              <div className="text-center space-y-4 max-w-xl px-4">
+                <h1 className="text-3xl md:text-5xl font-bold">
+                  {slide.title}
+                </h1>
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-green-900/30" />
+                <p className="text-muted-foreground text-lg">
+                  {slide.description}
+                </p>
 
-              {/* Content */}
-              <div className="absolute inset-0 flex items-center">
-                <div className="container max-w-6xl px-6">
-                  <div className="max-w-2xl text-center text-white space-y-4">
-                    <h1 className="text-3xl md:text-5xl font-bold">
-                      {slide.title}
-                    </h1>
-                    <p className="text-lg text-white/90">{slide.description}</p>
-                    <Button size="lg" asChild>
-                      <a href={slide.ctaLink}>{slide.ctaText}</a>
-                    </Button>
-                  </div>
-                </div>
+                {/* <Link href={slide.ctaLink}> */}
+                <Button size="lg">{slide.ctaText}</Button>
+                {/* </Link> */}
               </div>
             </div>
           </CarouselItem>
