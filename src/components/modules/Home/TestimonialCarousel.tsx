@@ -62,7 +62,7 @@ const testimonials: Testimonial[] = [
 
 export function TestimonialCarousel() {
   return (
-    <section className=" py-12 px-4">
+    <section className=" py-12">
       <div className="container mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold">Happy Clients Say</h2>
@@ -123,8 +123,9 @@ export function TestimonialCarousel() {
             ))}
           </CarouselContent>
 
-          <CarouselPrevious />
-          <CarouselNext />
+          {/* Arrows */}
+          <CarouselPrevious className="left-0" />
+          <CarouselNext className="right-0" />
         </Carousel>
       </div>
     </section>

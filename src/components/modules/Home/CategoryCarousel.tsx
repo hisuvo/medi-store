@@ -104,8 +104,8 @@ export function CategoryCarousel() {
         </CarouselContent>
 
         {/* Arrows */}
-        <CarouselPrevious className="-left-10" />
-        <CarouselNext className="-right-10" />
+        <CarouselPrevious className="left-0" />
+        <CarouselNext className="right-0" />
       </Carousel>
     </div>
   );

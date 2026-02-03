@@ -131,11 +131,11 @@ const Navbar = ({
       ],
     },
     {
-      title: "Pricing",
-      url: "#",
+      title: "Shop",
+      url: "/shop",
     },
     {
-      title: "Blog",
+      title: "Contact Us",
       url: "#",
     },
   ],

@@ -1,3 +1,19 @@
+import { AppSidebar } from "@/components/layouts/app-sidebar";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+
 export default function DashboardLayout({
   admin,
   customer,
@@ -7,16 +23,43 @@ export default function DashboardLayout({
   customer: React.ReactNode;
   seller: React.ReactNode;
 }) {
+  const userInfo = {
+    role: "customer",
+  };
+
   return (
-    <div className="p-4">
-      <nav>
-        <h2 className="text-4xl">This Dashboard Header</h2>
-      </nav>
-      <main className="container mx-auto">
-        {admin}
-        {seller}
-        {customer}
-      </main>
-    </div>
+    <SidebarProvider>
+      <AppSidebar user={userInfo} />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+          <SidebarTrigger className="-ml-1" />
+          <Separator
+            orientation="vertical"
+            className="mr-2 data-[orientation=vertical]:h-4"
+          />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem className="hidden md:block">
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="hidden md:block" />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </header>
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          {userInfo.role === "admin"
+            ? admin
+            : userInfo.role === `seller`
+              ? seller
+              : customer}
+
+          {/* {seller}
+          {customer} */}
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
