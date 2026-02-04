@@ -5,8 +5,8 @@ export const customerRoutes: Routes[] = [
     title: "Customer Dashboard",
     items: [
       {
-        title: "card",
-        url: "/card",
+        title: "Overview",
+        url: "/overview",
       },
       {
         title: "Checkout",
@@ -18,7 +18,7 @@ export const customerRoutes: Routes[] = [
       },
       {
         title: "Profile",
-        url: "/profile",
+        url: "/me",
       },
     ],
   },
