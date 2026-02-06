@@ -1,7 +1,4 @@
 import * as React from "react";
-
-import { SearchForm } from "@/components/layouts/search-form";
-import { VersionSwitcher } from "@/components/layouts/version-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -19,10 +16,7 @@ import { adminRoutes } from "@/routes/adminRoutes";
 import { customerRoutes } from "@/routes/customerRoutes";
 import { sellerRoutes } from "@/routes/sellerRoutes";
 import { Routes } from "@/types/routes.type";
-
-const data = {
-  versions: ["Medi-Store"],
-};
+import { Roles } from "@/constants/roles";
 
 export function AppSidebar({
   user,
@@ -32,16 +26,16 @@ export function AppSidebar({
 }) {
   let routes: Routes[] = [];
 
-  switch (user.role) {
-    case "admin":
+  switch ("SELLER") {
+    case Roles.admin:
       routes = adminRoutes;
       break;
 
-    case "seller":
+    case Roles.seller:
       routes = sellerRoutes;
       break;
 
-    case "customer":
+    case Roles.customer:
       routes = customerRoutes;
       break;
 
@@ -52,18 +46,14 @@ export function AppSidebar({
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
-        <SearchForm />
-      </SidebarHeader>
+      <SidebarHeader />
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {routes.map((item) => (
           <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+            <SidebarGroupLabel>
+              <SidebarHeader>{item.title}</SidebarHeader>
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (

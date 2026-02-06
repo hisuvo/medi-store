@@ -1,9 +1,12 @@
-import { Button } from "@/components/ui/button";
+import ShopClient from "@/components/modules/Shop/ShopClient";
 
-function ShopPage() {
+import { medicineServices } from "@/services/medicine.service";
+
+async function ShopPage() {
+  const { data } = await medicineServices.getMedicine();
   return (
     <div>
-      <Button variant="outline">Click me</Button>
+      <ShopClient medicines={data} />
     </div>
   );
 }

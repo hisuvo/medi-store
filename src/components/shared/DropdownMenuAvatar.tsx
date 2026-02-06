@@ -17,6 +17,7 @@ import {
   ShoppingCart,
   UserCheck,
 } from "lucide-react";
+import Link from "next/link";
 
 export function DropdownMenuAvatar() {
   return (
@@ -33,7 +34,7 @@ export function DropdownMenuAvatar() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <LayoutDashboardIcon />
-            Dashboard
+            <Link href={"/dashboard"}>Dashboard</Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem>

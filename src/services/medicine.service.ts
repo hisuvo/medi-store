@@ -5,7 +5,9 @@ const API_URL = env.API_URL;
 export const medicineServices = {
   getMedicine: async () => {
     try {
-      const res = await fetch(`${API_URL}/medicines`);
+      const res = await fetch(`${API_URL}/medicines`, {
+        next: { revalidate: 10 },
+      });
       const data = await res.json();
 
       if (data.success) {

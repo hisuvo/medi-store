@@ -29,12 +29,12 @@ export default function MedicineCard({
       <Card className="rounded-2xl shadow-sm hover:shadow-md transition-all overflow-hidden">
         {/* Image */}
         <div className="relative w-full h-44 bg-muted">
-          <Image
+          {/* <Image
             src={medicine.image || "/placeholder.png"}
             alt={medicine.name}
             fill
             className="object-cover"
-          />
+          /> */}
 
           {outOfStock && (
             <Badge className="absolute top-2 left-2">Out of Stock</Badge>
@@ -55,7 +55,7 @@ export default function MedicineCard({
 
           {medicine.description && (
             <p className="text-sm text-muted-foreground line-clamp-2">
-              {medicine.description}
+              {medicine.description.slice(0, 50)}....
             </p>
           )}
 

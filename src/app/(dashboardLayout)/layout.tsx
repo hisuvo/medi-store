@@ -1,11 +1,11 @@
+// export const dynamic = "force-dynamic";
+
 import { AppSidebar } from "@/components/layouts/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Roles } from "@/constants/roles";
 import { userServices } from "@/services/user.service";
-import { ReactNode } from "react";
 
 export default async function DashboardLayout({
   admin,
@@ -44,17 +43,13 @@ export default async function DashboardLayout({
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="/">Home</BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {userData.role === Roles.admin
+          {userData?.role === Roles.admin
             ? admin
-            : userData.role === Roles.seller
+            : "SELLER" === Roles.seller
               ? seller
               : customer}
         </div>
