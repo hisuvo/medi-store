@@ -49,7 +49,7 @@ export default async function DashboardLayout({
         <div className="flex flex-1 flex-col gap-4 p-4">
           {userData?.role === Roles.admin
             ? admin
-            : "SELLER" === Roles.seller
+            : userData?.role === Roles.seller
               ? seller
               : customer}
         </div>
