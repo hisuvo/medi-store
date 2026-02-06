@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function CustomerPage() {
+export default function CustomerDashboardPage() {
   return (
     <div>
-      <h1>This is Customer Dashboard</h1>
+      <h2>Customer Dashboard page</h2>
     </div>
   );
 }

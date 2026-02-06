@@ -28,6 +28,12 @@ export default async function DashboardLayout({
   const { data } = await userServices.getSession();
   const userData = data?.user;
 
+  const dashboardContent = {
+    [Roles.admin]: admin,
+    [Roles.seller]: seller,
+    [Roles.customer]: customer,
+  };
+
   return (
     <SidebarProvider>
       <AppSidebar user={userData} />
@@ -47,11 +53,7 @@ export default async function DashboardLayout({
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {userData?.role === Roles.admin
-            ? admin
-            : userData?.role === Roles.seller
-              ? seller
-              : customer}
+          {dashboardContent[userData?.role] || customer}
         </div>
       </SidebarInset>
     </SidebarProvider>
