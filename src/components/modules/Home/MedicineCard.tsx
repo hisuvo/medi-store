@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 import { Medicine } from "@/types/medicine.type";
+import Link from "next/link";
 
 type MedicineCardProps = {
   medicine: Medicine;
@@ -70,7 +71,9 @@ export default function MedicineCard({
 
         {/* Footer */}
         <CardFooter className="p-4 pt-0 flex gap-2">
-          <Button className="rounded-xl">Show Details</Button>
+          <Link href={`/shop/${medicine?.id}`} className="">
+            <Button className="rounded-xl">Show Details</Button>
+          </Link>
           <Button
             className="rounded-xl"
             disabled={outOfStock}

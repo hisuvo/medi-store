@@ -29,6 +29,10 @@ import {
 import { ModeToggle } from "./ModeToggle";
 import Link from "next/link";
 import { DropdownMenuAvatar } from "../shared/DropdownMenuAvatar";
+import { User } from "@/types/user.type";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface MenuItem {
   title: string;
@@ -58,6 +62,7 @@ interface NavbarProps {
       url: string;
     };
   };
+  user?: User;
 }
 
 const Navbar = ({
@@ -79,11 +84,21 @@ const Navbar = ({
     },
   ],
   auth = {
-    login: { title: "Login", url: "/login" },
+    login: { title: "Log in", url: "/login" },
     signup: { title: "Sign up", url: "/signup" },
   },
   className,
+  user,
 }: NavbarProps) => {
+  const router = useRouter();
+
+  const handleLogOut = async () => {
+    await authClient.signOut();
+
+    toast.success("Logge out successfull");
+    router.refresh();
+  };
+
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto">
@@ -107,13 +122,19 @@ const Navbar = ({
           <div className="flex gap-2">
             <DropdownMenuAvatar />
 
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
+            {user ? (
+              <Button onClick={() => handleLogOut()}>Log out</Button>
+            ) : (
+              <div className="space-x-2">
+                <Button asChild variant="outline" size="sm">
+                  <Link href={auth.login.url}>{auth.login.title}</Link>
+                </Button>
 
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+                <Button asChild variant="outline" size="sm">
+                  <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                </Button>
+              </div>
+            )}
 
             <ModeToggle />
           </div>

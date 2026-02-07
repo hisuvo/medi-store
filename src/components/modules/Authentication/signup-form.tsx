@@ -21,6 +21,7 @@ import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export const signUpSchema = z.object({
   name: z
@@ -30,15 +31,15 @@ export const signUpSchema = z.object({
 
   email: z.string().email("Please enter a valid email address"),
 
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .regex(/[A-Z]/, "Must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Must contain at least one lowercase letter")
-    .regex(/[0-9]/, "Must contain at least one number"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  // .regex(/[A-Z]/, "Must contain at least one uppercase letter")
+  // .regex(/[a-z]/, "Must contain at least one lowercase letter")
+  // .regex(/[0-9]/, "Must contain at least one number"),
 });
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router = useRouter();
+
   // Google login
   const handleGoogleLogin = async () => {
     return await authClient.signIn.social({
@@ -59,7 +60,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
     onSubmit: async ({ value }) => {
       let toastId = toast.loading("Creatin user");
-      console.log("submit register data", value);
+
       try {
         const { data, error } = await authClient.signUp.email(value);
 
@@ -67,8 +68,10 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
           toast.error(error.message, { id: toastId });
           return;
         }
-
         toast.success("User created successfully", { id: toastId });
+
+        router.replace("/");
+        router.refresh();
       } catch (error) {
         toast.error("Some thing went wrong, Please try again", { id: toastId });
       }
