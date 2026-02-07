@@ -6,7 +6,7 @@ async function ShopPage() {
   const { data } = await medicineServices.getMedicine();
   return (
     <div>
-      {/* <ShopClient medicines={data} /> */}
+      <ShopClient medicines={data} />
       <h2>This is shop store</h2>
     </div>
   );
