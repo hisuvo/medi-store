@@ -1,11 +1,9 @@
-import UpdateAndDeleteMedicine from "@/components/modules/Seller/UpdateAndDeleteMedicine";
-import React from "react";
+import OrdersUpdate from "@/components/modules/Seller/OrderUpdate";
 
 export default function OrderPage() {
   return (
     <div>
-      <h1>this is seller Order page</h1>
-      <UpdateAndDeleteMedicine />
+      <OrdersUpdate />
     </div>
   );
 }
