@@ -36,7 +36,7 @@ export default function UpdateAndDeleteMedicine() {
       const userRole = (session.data?.user as any)?.role;
       setCurrentUserId(userId ?? null);
 
-      const res = await fetch(`${apiBase}/medicines`);
+      const res = await fetch(`${apiBase}/medicines?search=${userId}`);
       if (!res.ok) throw new Error("Failed to fetch medicines");
       const data = await res.json();
       const all = (data.result || data) as Medicine[];
@@ -188,6 +188,19 @@ export default function UpdateAndDeleteMedicine() {
                             setFormState((s) => ({
                               ...s,
                               quantity: Number(e.target.value),
+                            }))
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Label>Stock</Label>
+                        <Input
+                          type="number"
+                          value={String(formState.stock ?? 0)}
+                          onChange={(e) =>
+                            setFormState((s) => ({
+                              ...s,
+                              stock: Number(e.target.value),
                             }))
                           }
                         />

@@ -123,3 +123,49 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Fog animation */
+
+.fog {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.25),
+    transparent 60%
+  );
+  filter: blur(80px);
+  animation: fogMove 25s linear infinite;
+}
+
+.fog-1 {
+  top: -40%;
+  left: -40%;
+}
+
+.fog-2 {
+  top: -50%;
+  right: -40%;
+  animation-duration: 35s;
+  opacity: 0.6;
+}
+
+.fog-3 {
+  bottom: -50%;
+  left: -30%;
+  animation-duration: 45s;
+  opacity: 0.4;
+}
+
+@keyframes fogMove {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-10%) translateY(5%);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
