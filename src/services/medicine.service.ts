@@ -8,15 +8,20 @@ export const medicineServices = {
       const res = await fetch(`${API_URL}/medicines`, {
         next: { revalidate: 10 },
       });
+
+      if (!res.ok) {
+        return { data: [], error: { message: `API returned ${res.status}` } };
+      }
+
       const data = await res.json();
 
       if (data.success) {
-        return { data: data.result, error: null };
+        return { data: data.result || [], error: null };
       }
-      return { data: null, error: { message: "Something want wrong" } };
+      return { data: [], error: { message: "Something went wrong" } };
     } catch (error) {
-      console.log(error);
-      return { data: null, error: { message: "Something want wrong" } };
+      console.log("Medicine fetch error:", error);
+      return { data: [], error: { message: "Failed to fetch medicines" } };
     }
   },
 };

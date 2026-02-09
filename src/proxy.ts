@@ -1,65 +1,59 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Roles } from "./constants/roles";
 import { userServices } from "./services/user.service";
+import { Roles } from "./constants/roles";
+import { authClient } from "./lib/auth-client";
 
-/**
- * Default dashboard for each role
- */
-const ROLE_DASHBOARD: Record<string, string> = {
+const Role_Dashboard: Record<string, string> = {
   [Roles.admin]: "/admin-dashboard",
   [Roles.seller]: "/seller-dashboard",
   [Roles.customer]: "/dashboard",
 };
 
-/**
- * Route protection rules
- */
-const PROTECTED_ROUTES: Record<string, string> = {
-  "/admin-dashboard": Roles.admin,
-  "/seller-dashboard": Roles.seller,
-  "/dashboard": Roles.customer,
-};
-
 export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const pathname = request.nextUrl.pathname;
 
-  // get session
-  const { data } = await userServices.getSession();
-  const user = data?.user;
+  try {
+    const { data } = await userServices.getSession();
+    const user = data?.user;
 
-  // Not logged in → login
-  if (!user) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+    if (!user) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
 
-  const role = user.role as string;
+    const userRole = user.role as string;
+    const allowedDashboard = Role_Dashboard[userRole];
 
-  // Find which protected route the user is accessing
-  const matchedRoute = Object.keys(PROTECTED_ROUTES).find((route) =>
-    pathname.startsWith(route),
-  );
+    if (!allowedDashboard) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
 
-  if (!matchedRoute) {
-    return NextResponse.next();
-  }
+    const isAccessAdmin = pathname.startsWith("/admin-dashboard");
+    const isAccessSeller = pathname.startsWith("/seller-dashboard");
+    const isAccessCustomer = pathname.startsWith("/dashboard");
 
-  const requiredRole = PROTECTED_ROUTES[matchedRoute];
-  const allowedDashboard = ROLE_DASHBOARD[role];
+    const isUnauthorized =
+      (isAccessAdmin && userRole !== Roles.admin) ||
+      (isAccessSeller && userRole !== Roles.seller) ||
+      (isAccessCustomer && userRole !== Roles.customer);
 
-  // Wrong role OR accessing base dashboard → redirect to correct one
-  if (role !== requiredRole || pathname === matchedRoute) {
-    if (pathname !== allowedDashboard) {
+    if (isUnauthorized) {
       return NextResponse.redirect(new URL(allowedDashboard, request.url));
     }
-  }
 
-  return NextResponse.next();
+    return NextResponse.next();
+  } catch (error) {
+    console.error("Proxy middleware error:", error);
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 }
 
 export const config = {
   matcher: [
-    "/admin-dashboard/:path*",
-    "/seller-dashboard/:path*",
+    "/dashboard",
     "/dashboard/:path*",
+    "/seller-dashboard",
+    "/seller-dashboard/:path*",
+    "/admin-dashboard",
+    "/admin-dashboard/:path*",
   ],
 };

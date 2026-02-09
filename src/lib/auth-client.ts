@@ -1,5 +1,8 @@
 import { createAuthClient } from "better-auth/react";
+
+// Use the client-visible env var on the frontend. Fall back to server-only
+// `BACKEND_URL` when present (useful in SSR or dev setups).
 export const authClient = createAuthClient({
-  /** The base URL of the server (optional if you're using the same domain) */
-  baseURL: process.env.BACKEND_URL,
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || process.env.BACKEND_URL,
+  credentials: "include",
 });

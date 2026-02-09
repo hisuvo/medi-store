@@ -56,7 +56,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       let toastId = toast.loading("Logge in..");
 
       try {
-        const { data, error } = await authClient.signIn.email(value);
+        const { error } = await authClient.signIn.email(value);
 
         if (error) {
           toast.error(error.message, { id: toastId });
@@ -66,7 +66,6 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
         toast.success("User Logged in successfully", { id: toastId });
 
         router.replace("/");
-        router.refresh();
       } catch (error) {
         toast.error("Some thing went wrong, Please try again", { id: toastId });
       }
@@ -96,7 +95,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
                   field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor="field.name">Email</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>Email</FieldLabel>
                     <Input
                       id={field.name}
                       name={field.name}
@@ -118,10 +117,11 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
                   field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor="field.name">Password</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                     <Input
                       id={field.name}
                       name={field.name}
+                      type="password"
                       value={field.state.value}
                       onChange={(e) => field.handleChange(e.target.value)}
                     ></Input>

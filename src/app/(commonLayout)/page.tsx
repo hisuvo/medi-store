@@ -6,8 +6,10 @@ import { TestimonialCarousel } from "@/components/modules/Home/TestimonialCarous
 import { medicineServices } from "@/services/medicine.service";
 import { Medicine } from "@/types/medicine.type";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
-  const medicines = await medicineServices.getMedicine();
+  const { data: medicines } = await medicineServices.getMedicine();
 
   return (
     <div className="space-y-8">
@@ -15,9 +17,13 @@ export default async function Home() {
       <CategoryCarousel />
       <h2 className="text-4xl ">New Medicine</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {medicines?.data?.slice(0, 3).map((medicine: Medicine) => (
-          <MedicineCard key={medicine.id} medicine={medicine} />
-        ))}
+        {medicines && medicines.length > 0 ? (
+          medicines.slice(0, 3).map((medicine: Medicine) => (
+            <MedicineCard key={medicine.id} medicine={medicine} />
+          ))
+        ) : (
+          <p>No medicines available</p>
+        )}
       </div>
       <TestimonialCarousel />
     </div>

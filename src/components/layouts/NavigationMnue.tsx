@@ -29,7 +29,6 @@ import {
 import { ModeToggle } from "./ModeToggle";
 import Link from "next/link";
 import { DropdownMenuAvatar } from "../shared/DropdownMenuAvatar";
-import { User } from "@/types/user.type";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -62,7 +61,6 @@ interface NavbarProps {
       url: string;
     };
   };
-  user?: User;
 }
 
 const Navbar = ({
@@ -88,14 +86,17 @@ const Navbar = ({
     signup: { title: "Sign up", url: "/signup" },
   },
   className,
-  user,
 }: NavbarProps) => {
   const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
+
+  const user = session?.user;
 
   const handleLogOut = async () => {
     await authClient.signOut();
 
     toast.success("Logge out successfull");
+    router.replace("/login");
     router.refresh();
   };
 
@@ -122,7 +123,9 @@ const Navbar = ({
           <div className="flex gap-2">
             <DropdownMenuAvatar />
 
-            {user ? (
+            {isPending ? (
+              <div className="h-8 w-20 animate-pulse rounded bg-muted" />
+            ) : user ? (
               <Button onClick={() => handleLogOut()}>Log out</Button>
             ) : (
               <div className="space-x-2">

@@ -13,14 +13,16 @@ import {
 import { Medicine } from "@/types/medicine.type";
 
 type Props = {
-  medicines: Medicine[];
+  medicines: Medicine[] | null;
 };
 
 export default function ShopClient({ medicines }: Props) {
   const [search, setSearch] = useState("");
   const [priceFilter, setPriceFilter] = useState("all");
 
-  const filteredMedicines = medicines.filter((medicine) => {
+  const medicineList = medicines || [];
+
+  const filteredMedicines = medicineList.filter((medicine) => {
     const matchSearch =
       medicine.name.toLowerCase().includes(search.toLowerCase()) ||
       medicine.manufacturer?.toLowerCase().includes(search.toLowerCase());

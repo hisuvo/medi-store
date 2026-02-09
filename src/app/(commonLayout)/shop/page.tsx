@@ -2,6 +2,8 @@ import ShopClient from "@/components/modules/Shop/ShopClient";
 
 import { medicineServices } from "@/services/medicine.service";
 
+export const dynamic = "force-dynamic";
+
 async function ShopPage() {
   const { data } = await medicineServices.getMedicine();
   return (
