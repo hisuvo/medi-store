@@ -1,9 +1,9 @@
-import React from "react";
+import OrdersHistory from "@/components/modules/customer/OrderHistory";
 
 export default function OrderPage() {
   return (
     <div>
-      <h2>This is Customer order page</h2>
+      <OrdersHistory />
     </div>
   );
 }
