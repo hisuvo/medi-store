@@ -1,4 +1,5 @@
 import { Routes } from "@/types/routes.type";
+import { HomeIcon } from "lucide-react";
 
 export const customerRoutes: Routes[] = [
   {
@@ -6,7 +7,7 @@ export const customerRoutes: Routes[] = [
     items: [
       {
         title: "User Home",
-        url: "/dashboard/user-home",
+        url: "/dashboard",
       },
       {
         title: "Orders",

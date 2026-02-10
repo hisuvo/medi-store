@@ -33,7 +33,7 @@ export async function CategoryCarousel() {
 
   const data = await categoriesFetch();
 
-  const categories = data.result;
+  const categories = data?.result;
 
   return (
     <div className="relative container mx-auto px-6">
@@ -54,10 +54,10 @@ export async function CategoryCarousel() {
                   {/* Text */}
                   <div>
                     <h3 className="font-semibold">
-                      {category.name.slice(0, 15)}
+                      {category?.name.slice(0, 15)}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {category._count.medicines} products
+                      {category?._count.medicines} products
                     </p>
                   </div>
                 </div>

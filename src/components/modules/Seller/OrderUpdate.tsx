@@ -74,7 +74,7 @@ export default function OrdersUpdate() {
                     </td>
                     <td className="text-right flex gap-2 justify-end items-center">
                       <Select defaultValue={order.status}>
-                        <SelectTrigger className="w-[140px]">
+                        <SelectTrigger className="w-35">
                           <SelectValue placeholder="Change status" />
                         </SelectTrigger>
                         <SelectContent>
