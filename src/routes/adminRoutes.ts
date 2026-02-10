@@ -5,15 +5,11 @@ export const adminRoutes: Routes[] = [
     title: "Admin Dashboard",
     items: [
       {
-        title: "Dashboard",
-        url: "/admin-dashboard/admin-home",
+        title: "Admin Home",
+        url: "/admin-dashboard",
       },
       {
-        title: "Categories",
-        url: "/admin-dashboard/categories",
-      },
-      {
-        title: "Create Category",
+        title: "Manage Categories",
         url: "/admin-dashboard/categories",
       },
       {

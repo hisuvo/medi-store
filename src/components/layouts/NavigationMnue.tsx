@@ -121,25 +121,25 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <DropdownMenuAvatar />
-
             {isPending ? (
               <div className="h-8 w-20 animate-pulse rounded bg-muted" />
             ) : user ? (
-              <Button onClick={() => handleLogOut()}>Log out</Button>
+              <div className="flex gap-2">
+                <DropdownMenuAvatar />
+                <Button onClick={() => handleLogOut()}>Log out</Button>
+                <ModeToggle />
+              </div>
             ) : (
-              <div className="space-x-2">
+              <div className="flex gap-2">
                 <Button asChild variant="outline" size="sm">
                   <Link href={auth.login.url}>{auth.login.title}</Link>
                 </Button>
-
                 <Button asChild variant="outline" size="sm">
                   <Link href={auth.signup.url}>{auth.signup.title}</Link>
                 </Button>
+                <ModeToggle />
               </div>
             )}
-
-            <ModeToggle />
           </div>
         </nav>
 

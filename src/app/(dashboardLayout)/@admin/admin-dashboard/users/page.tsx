@@ -1,9 +1,10 @@
+import AdminManageUsers from "@/components/modules/admin/AdminManageUsers";
 import React from "react";
 
 export default function AdminUserPage() {
   return (
     <div>
-      <h2>This is admin user page</h2>
+      <AdminManageUsers />
     </div>
   );
 }
