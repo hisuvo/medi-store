@@ -71,7 +71,7 @@ export default function MedicineCard({
 
         {/* Footer */}
         <CardFooter className="p-4 pt-0 flex gap-2">
-          <Link href={`/shop/${medicine?.id}`} className="">
+          <Link href={`#`} className="">
             <Button className="rounded-xl">Show Details</Button>
           </Link>
           <Button

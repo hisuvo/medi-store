@@ -1,5 +1,3 @@
-// "use client";
-
 import {
   Carousel,
   CarouselContent,
@@ -44,7 +42,7 @@ export async function CategoryCarousel() {
         className="w-full"
       >
         <CarouselContent>
-          {categories.map((category: Category) => (
+          {categories?.map((category: Category) => (
             <CarouselItem
               key={category.id}
               className="basis-1/2 sm:basis-1/3 md:basis-1/5"

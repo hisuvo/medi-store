@@ -5,7 +5,10 @@ import { medicineServices } from "@/services/medicine.service";
 export const dynamic = "force-dynamic";
 
 async function ShopPage() {
-  const { data } = await medicineServices.getMedicine();
+  const { data } = await medicineServices.getMedicine({
+    isActive: true,
+    search: "",
+  });
   return (
     <div>
       <ShopClient medicines={data} />
